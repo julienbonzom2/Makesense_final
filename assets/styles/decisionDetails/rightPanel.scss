@@ -1,0 +1,90 @@
+.timeline-schema {
+    width: 15%;
+}
+
+.timeline-point, .last-timeline-point {
+    margin-bottom: 2%;
+    width: 8px;
+    height: 8px;
+    background-color: $atlantis;
+    border-radius: 4px;
+    position: relative;
+}
+.first-point {
+    margin-bottom: 4%;
+    width: 8px;
+    height: 8px;
+    background-color: $atlantis;
+    border-radius: 4px;
+    position: relative;
+}
+
+.last-timeline-point {
+    &:before {
+        position: absolute;
+        content: "";
+        height: 50px;
+        left: 2.2px;
+        width: 3px;
+        background-color:$atlantis;
+        bottom: 100%;
+    }
+}
+
+.timeline-point {
+    &:before {
+        position: absolute;
+        content: "";
+        height: 50px;
+        left: 2.2px;
+        width: 3px;
+        background-color: $atlantis;
+        bottom:0;
+    }
+}
+
+.decision-status-timeline {
+    margin-left: 10px;
+    color: $blue-dianne;
+    font-family: $main-font;
+}
+
+.timeline-date {
+    width: 110px;
+    font-family: $main-font;
+    color: $blue-dianne;
+}
+
+.right-panel-title {
+    font-family: $main-font;
+    color: $blue-dianne;
+    font-weight:600;
+}
+.avatar-people-list {
+    height:40px;
+    width:40px;
+    border-radius:20px
+}
+.avatar-impacted .avatar-people-list + .avatar-people-list {
+    margin-left:-20px;
+}
+.impacted-people, .expert-people {
+    margin-top:5%;
+}
+.side-panel-anchor-link {
+    display:block;
+    width:40%;
+    text-align: center;
+    margin-top:20px;
+    color:$blue-dianne;
+    font-family: $main-font;
+    //text-decoration: underline;
+    font-weight:400;
+    border:2px solid $blue-dianne;
+    padding:5px;
+    border-radius:20px;
+    &:hover {
+        background-color: $blue-dianne;
+        color:white;
+    }
+}

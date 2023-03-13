@@ -1,0 +1,93 @@
+ .table-profile {
+        margin : 5rem;
+     padding: 5rem;
+ }
+
+ .flex_button_delete {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .gradient-custom {
+     /* fallback for old browsers */
+     background: #C1E94E;
+
+     /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+
+ }
+
+ .align-password-button {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .margin-profil-block {
+     margin-top: 10rem;
+ }
+
+ .button-valid {
+     color : #70AF90;
+     border-color: #70AF90;
+     transition-duration: 0.4s;
+ }
+
+ .button-valid:hover {
+     background-color: #70AF90;
+     color: white;
+ }
+
+ .button-warning {
+     color : #f3976b;
+     border-color: #f3976b;
+     transition-duration: 0.4s;
+ }
+
+ .button-warning:hover {
+     background-color: #f3976b;
+     color: white;
+ }
+
+ .button-classic {
+     color : #0C3944;
+     border-color: #0C3944;
+     transition-duration: 0.4s;
+ }
+
+ .button-classic:hover {
+     background-color: #0C3944;
+     color: white;
+ }
+
+ .avatar_profil_preview {
+     align-items: center;
+     justify-content: center;
+ }
+
+ .avatar_profil_edit {
+     display: flex;
+     justify-content: center;
+ }
+
+ #file-ip-1-preview {
+     margin: 0;
+     display: flex;
+     justify-content: center;
+ }
+
+ .button-delete-account {
+     background-color: #f3976b;
+     color : white;
+     border-color: #f3976b;
+     transition-duration: 0.4s;
+ }
+
+ .button-delete-account:hover {
+     background-color: #f3976b;
+     color: white;
+     border-color: white;
+     box-shadow: 0 0 11px rgba(33,33,33,.2);
+ }
+

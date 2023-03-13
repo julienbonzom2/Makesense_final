@@ -1,0 +1,85 @@
+.header-container {
+    width: 100vw;
+    margin-bottom: 50px;
+    .header-connected {
+        padding-top: 20px;
+        background-color: lighten($bg-neutral,10%);
+
+        .logo-makesense {
+            width: 45%;
+            img {
+                width: 250px;
+            }
+        }
+    }
+}
+
+.right-header {
+    width: 55%;
+}
+
+.dropdown-toggle {
+    color: $blue-dianne;
+    background-color: $bg-neutral;
+    border: 0;
+}
+
+.p3-user {
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .logo-makesense {
+        margin-left: 175px;
+    }
+    .p3-user-list {
+        width: 65%;
+
+        ul {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 0;
+            padding: 10px 10px;
+            list-style: none;
+        }
+    }
+
+    .notification-and-user-dropdown {
+        width: 45%;
+    }
+
+    .p3-user-dropdown-tel {
+        display: none;
+    }
+}
+
+.favor-vote-count {
+    color: green;
+}
+
+.not-favor-vote-count {
+    color: $brick-red;
+}
+
+.bell-active {
+    color: $brick-red;
+}
+
+.bg-light:hover {
+    background-color: darken(rgb(248, 249, 250), 20%) !important;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.btn-without-bg {
+    background-color: inherit;
+}
+
+//.notification-dropdown {
+//    margin-left: 75px;
+//}
+.space-placeholder {
+    height:80px;
+}

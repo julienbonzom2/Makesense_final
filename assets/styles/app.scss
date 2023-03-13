@@ -1,0 +1,45 @@
+$blue-dianne : rgb(12,57,68);
+$zeus: rgb(71,65,54);
+$atlantis: rgb(193,233,78);
+$brick-red: rgb(198,46,67);
+$cerise-dark: rgb(155,8,79);
+$sahara-sand:rgb(252,246,160);
+$silver-tree:rgb(112,175,144);
+$flame-pea:rgb(243,151,107);
+$bg-neutral: #D9D9D9;
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600;800&display=swap');
+$main-font:'Raleway', sans-serif;
+//start coding by removing this file and adding yours ;)
+@import "wcs";
+@import "connexionForm";
+@import "resetForm";
+@import "registerForm";
+@import "allDecisions";
+@import "decisionCreation/creationDecisionForm";
+@import "decisionCreation/stepVisualisation";
+@import "headerConnected";
+@import "profile";
+@import "decisionDetails/decisionDetails";
+@import "decisionDetails/rightPanel.scss";
+@import "notConnected";
+@import "animationBell";
+@import "chart";
+@import "adminLateList";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    //font-family: Verdana, sans-serif;
+    overflow-x: hidden ;
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

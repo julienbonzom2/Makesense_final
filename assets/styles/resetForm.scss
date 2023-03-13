@@ -1,0 +1,65 @@
+.p3-form-reset-password-title {
+    color: #0C3944;
+    display: flex;
+    justify-content: center;
+    //margin-top: 10px;
+
+    h1 {
+
+    }
+}
+
+.p3-form-reset-password {
+    padding-top: 10px;
+    color: #0C3944;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #D9D9D9;
+    width: 85%;
+    margin: auto;
+    margin-top: 25px;
+    border-radius: 8px;
+    .p3-input-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        margin: auto;
+        width: 50%;
+    }
+}
+
+.p3-form-reset-password-btn {
+    //width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #70AF90;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .p3-form-reset-password {
+        width: 55%;
+        padding: 20px;
+        .p3-input-label {
+            width: 47%;
+        }
+    }
+}
+
+@media screen and (min-device-width: 1024px){
+    .p3-form-reset-password {
+        gap: 20px;
+        width: 32%;
+        padding: 20px;
+        .p3-input-label {
+            width: 40%;
+        }
+    }
+}

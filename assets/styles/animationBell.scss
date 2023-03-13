@@ -1,0 +1,23 @@
+@keyframes bell {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(45deg);
+    }
+    60% {
+        transform: rotate(-45deg);
+    }
+    80% {
+        transform: rotate(0deg);
+    }
+}
+
+.bell-impacted-or-expert i {
+    animation: bell infinite 1.5s linear;
+    &:hover {
+        animation: inherit;
+    }
+}
+
+

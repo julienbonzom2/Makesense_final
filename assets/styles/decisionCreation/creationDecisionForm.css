@@ -1,0 +1,18 @@
+.titleInput {
+  width: 50%;
+}
+
+.categoryInput {
+  width: 30%;
+}
+
+.titleLabel, .categoryLabel, .problemLabel {
+  padding: 20px;
+  padding-left: 0;
+}
+
+:root {
+  --ck-color-toolbar-background: red;
+}
+
+/*# sourceMappingURL=creationDecisionForm.css.map */

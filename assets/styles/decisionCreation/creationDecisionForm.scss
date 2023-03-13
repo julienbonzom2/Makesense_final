@@ -1,0 +1,233 @@
+@import "stepVisualisation";
+
+.titleInput {
+    width: 50%
+}
+
+.categoryInput {
+    width: 30%;
+}
+
+.titleLabel, .categoryLabel, .problemLabel {
+    padding: 20px;
+    padding-left: 0;
+    font-family: $main-font;
+    color: $blue-dianne;
+    font-weight: 600;
+}
+
+body {
+    animation: fadeInAnimation ease 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.step-process {
+    position: fixed;
+    height: 1100px;
+    width: 200px;
+}
+
+.submit-button {
+    background-color: $silver-tree;
+    font-family: $main-font;
+
+    &:hover {
+        background-color: darken($silver-tree, 30%);
+        color: white;
+    }
+}
+
+.cancel-button-step1 {
+    font-family: $main-font;
+    background-color: $brick-red;
+    color: white;
+
+    &:hover {
+        background-color: darken($brick-red, 20%);
+        color: white;
+    }
+
+}
+
+.later-button {
+    background-color: $flame-pea;
+    font-family: $main-font;
+
+    &:hover {
+        background-color: darken($flame-pea, 30%);
+        color: white;
+    }
+}
+
+.back-button {
+    background-color: #D9D9D9;
+    font-family: $main-font;
+
+    &:hover {
+        background-color: darken(#D9D9D9, 30%);
+        color: white;
+    }
+}
+
+.section-back-button {
+    background-color: $blue-dianne;
+    font-family: $main-font;
+    color: white;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: darken($bg-neutral, 10%);
+        color: $blue-dianne;
+    }
+}
+
+.summary-category {
+    font-family: $main-font;
+    color: $blue-dianne;
+}
+
+.summary-creation-section-title {
+    font-family: $main-font;
+    color: $blue-dianne;
+    font-weight: 600;
+
+}
+
+.creation-section-title {
+    font-family: $main-font;
+    color: $blue-dianne;
+    font-weight: bold;
+}
+
+.form-avatar-image, .form-avatar-icon {
+    height: 80px;
+    width: 80px;
+    display: block;
+    border-radius: 40px;
+}
+
+#create_decision_step4_form_user {
+    display: flex;
+    flex-wrap: wrap;
+    height: 600px;
+    overflow: scroll;
+    border: 1px solid $bg-neutral;
+    border-radius: 8px;
+}
+
+.form-user-display, .user-display {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.form-user-display {
+    cursor: pointer;
+    position: relative;
+
+    .avatar-checkbox {
+        display: none;
+    }
+
+    &:after {
+        font: var(--fa-font-solid);
+        content: "\f058";
+        color: $silver-tree;
+        display: none;
+    }
+
+    &.selected {
+        border: 3px solid $silver-tree;
+        background-color: lighten($silver-tree, 40%);
+
+        &:after {
+            display: initial;
+            position: absolute;
+            left: 87%;
+            top: 85%;
+        }
+    }
+}
+
+.form-section-title {
+    font-family: $main-font;
+    color: $blue-dianne;
+    padding: 20px;
+    font-weight: 400;
+    font-size: clamp(1.5em, 24px, 3vw);
+}
+
+.form_error {
+    ul {
+        padding-left: 0;
+
+        li {
+            list-style: none;
+            font-family: $main-font;
+            background-color: lighten($brick-red, 40%);
+            border: 2px solid $brick-red;
+            border-radius: 8px;
+            width: 50%;
+            color: $brick-red;
+            line-height: 32px;
+            text-align: center;
+        }
+    }
+}
+
+.ck-editor {
+    color: $blue-dianne;
+}
+
+.users-names-form {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin: 0;
+}
+
+.summary-infos-title {
+    color: $blue-dianne;
+    font-family: $main-font;
+    width: 9%;
+}
+
+.summary-rate-text {
+    font-family: $main-font;
+    border: 1px solid $blue-dianne;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: $blue-dianne;
+    color: white;
+}
+
+.decision-summary-header-accordion {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+.input-research-people-creation {
+    .ts-control {
+        border-radius:8px;
+    }
+}
+
+
+

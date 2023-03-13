@@ -1,0 +1,29 @@
+.logo-makesense-model-tel {
+    height: 70px;
+    width: 410px;
+    margin-left: 5px;
+}
+.message{
+    color: $blue-dianne;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 15px;
+    background: #D9D9D9;
+    padding: 20px;
+}
+.warning{
+    color: $cerise-dark;
+}
+.connexion{
+    padding: 10px;
+    border-radius: 10px;
+    background: #70AF90;
+    border-style: none;
+}
+.connexion:hover {
+    background-color: #D9D9D9;
+    border-style: none;
+}

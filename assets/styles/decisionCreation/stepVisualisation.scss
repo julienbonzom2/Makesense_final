@@ -1,0 +1,47 @@
+.visual-step-title {
+    font-family: $main-font;
+    font-weight:600;
+    text-align: center;
+    line-height: 64px;
+    position: relative;
+    border-radius: 8px;
+    margin: 0;
+    background-color: $bg-neutral;
+    &.after-point {
+        &:after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            border-radius: calc(15px / 2);
+            background-color: lighten($zeus,30%);
+            position: absolute;
+            right: 45%;
+            top: 100%;
+        }
+    }
+    &.before-point {
+        &:before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            border-radius: calc(15px / 2);
+            background-color: lighten($zeus,30%);
+            position: absolute;
+            bottom: 100%;
+            right: 45%;
+            color:lighten($zeus,20%),
+        }
+    }
+}
+.link-between-steps {
+    width: 5px;
+    height: 50px;
+    background-color:lighten($zeus,30%);
+    margin-left: 49.8%;
+    margin-top: 5px;
+}
+.current-step {
+    background-color: $blue-dianne;
+    color: white;
+}
+
