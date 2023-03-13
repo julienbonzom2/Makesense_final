@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between single-comment-clock">
+    <div
+        class="accordion-body-text comment-block{% if comment.associated.user == app.user %} comment-author-is-user {% endif %}">
+        <div class="d-flex align-content-end">
+            <img src="{{ asset('build/images/'~comment.associated.user.avatar) }}"
+                 alt="" width="40" height="40">
+            <p class="align-self-end ps-2 m-0">
+                by <span
+                    class="decision-details-author-names">{{ comment.associated.user.firstname }}{{ comment.associated.user.lastname }}</span>
+                , the {{ comment.createdAt | date("m/d/Y") }}
+                <span class="is-favorable-icon ms-2">
+                    {% if comment.associated.isFavorable %}
+                        <i class="fa-solid fa-thumbs-up thumb-up-icon"></i>
+                    {% elseif comment.associated.isFavorable is not null %}
+                        <i class="fa-solid fa-thumbs-down thumb-down-icon"></i>
+                    {% endif %}
+                </span>
+            </p>
+        </div>
+
+        <p class="comment-content pt-3">{{ comment.content }}</p>
+
+        <div class="borderBottom"></div>
+    </div>
+
+    {% if comment.associated.user == app.user %}
+        <form method="post" class="update-comment-form hidden"
+              action="{{ path('app_comments_edit', {'id': comment.id}) }}"
+              onsubmit="return confirm('Are you sure you want to update this item?');">
+            <label class="titleLabel">Update your comment {% if comment.commentType == 'Opinion' %} opinion {% endif %}</label>
+            {% if comment.commentType == 'Opinion' %}
+            <select name="vote" id="vote-update" class="form-control vote-selector ms-0 mt-2 w-50">
+                <option value="">--- Change your vote ---</option>
+                <option value="true">In favor</option>
+                <option value="false">Not in favor</option>
+            </select>
+            {% endif %}
+            <textarea type="text" name="comment"
+                      class="form-control update-comment-textarea mt-2"
+                      value="{{ comment.content }}"
+                      rows="5">{{ comment.content }}</textarea>
+            <button type="submit" class="form-control submit-button mb-2 ms-0 w-25">Update</button>
+        </form>
+        <div class="icons-comments d-flex flex-column justify-content-center">
+            <form method="post"
+                  action="{{ path('app_comments_delete', {'id': comment.id}) }}"
+                  onsubmit="return confirm('Are you sure you want to delete your comment?');">
+                <input type="hidden" name="_token"
+                       value="{{ csrf_token('delete' ~ comment.id) }}">
+                <button class="btn pb-0"><i class="fa-solid fa-trash"></i></button>
+            </form>
+            <button class="btn pt-0 toggle-update-comment-block">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+        </div>
+    {% endif %}
+
+</div>

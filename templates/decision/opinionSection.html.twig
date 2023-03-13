@@ -1,0 +1,18 @@
+<button type="button" class="add-comment-button" id="toggle-comment-input">Add your opinion</button>
+<div class="decision-details-post-comment hidden" id="add-comment-block">
+    {{ form_start(formOpinion) }}
+    {% if status == 'Impacted' %}
+        {{ form_label(formOpinion.content, 'Comment the decision') }}
+    {% endif %}
+    {% if status == 'Expert' %}
+        {{ form_label(formOpinion.content, 'Give your opinion') }}
+    {% endif %}
+    {{ form_label(formOpinion.isFavorable, 'Vote') }}
+    {{ form_widget(formOpinion.isFavorable) }}
+    {{ form_widget(formOpinion.content, { 'attr': {
+        'rows' : '5',
+    }} ) }}
+
+    {{ form_row(formOpinion.submit) }}
+    {{ form_end(formOpinion, {'render_rest': false}) }}
+</div>

@@ -1,0 +1,13 @@
+<div class="all-decisions">
+    <h3>My decisions with delay in their process</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if lateDecisions is not empty %}
+            {% for decision in lateDecisions %}
+                {% include 'home/blockForOneDecision.html.twig' %}
+            {% endfor %}
+        {% else %}
+            <h4>You have not any decision with a delay in their process</h4>
+        {% endif %}
+    </div>
+</div>

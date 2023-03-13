@@ -1,0 +1,5 @@
+{% for decision in firstDecisionsTaken %}
+{#    {% if decision.status.name == 'Première décision prise' %}#}
+    {% include 'home/blockForOneDecision.html.twig' %}
+{#    {% endif %}#}
+{% endfor %}

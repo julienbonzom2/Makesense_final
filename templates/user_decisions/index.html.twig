@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <div class="header-container">
+            {% include '_header/headerConnected.html.twig' %}
+        </div>
+        {% include 'user_decisions/myDecisions.html.twig' %}
+
+        {% include 'user_decisions/decisionsLate.html.twig' %}
+
+        {% include 'user_decisions/draftDecisions.html.twig' %}
+    {% endif %}
+{% endblock %}

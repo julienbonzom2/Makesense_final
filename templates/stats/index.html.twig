@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StatsController!{% endblock %}
+
+{% block body %}
+    <div class="header-container">
+        {% include '_header/headerConnected.html.twig' %}
+    </div>
+
+    <h2 class="text-center mt-3 mb-2 creation-section-title">Statistics</h2>
+    <div class="all-decisions">
+        <h3>Decisions created in a trimester</h3>
+        <hr class="p3-separateur">
+        <div class="bar-chart mx-auto mb-3">
+            {{ render_chart(barChart) }}
+        </div>
+        <h3>Decisions by their status over the last 30 days</h3>
+        <hr class="p3-separateur">
+        <div class="w-50 mx-auto mb-3">
+            {{ render_chart(pieChart) }}
+        </div>
+        <h3>Conversion rate from each status</h3>
+        <hr class="p3-separateur">
+        <div class="w-50 mx-auto">
+            {{ render_chart(multiplePieCart) }}
+        </div>
+    </div>
+
+
+{% endblock %}

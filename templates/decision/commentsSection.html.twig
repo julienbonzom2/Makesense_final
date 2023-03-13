@@ -1,0 +1,15 @@
+<button type="button" class="add-comment-button" id="toggle-comment-input">Add your comment</button>
+<div class="decision-details-post-comment hidden" id="add-comment-block">
+    {{ form_start(formComment) }}
+    {% if status == 'Impacted' %}
+        {{ form_label(formComment.content, 'Comment the decision') }}
+    {% endif %}
+    {% if status == 'Expert' %}
+        {{ form_label(formComment.content, 'Give your opinion') }}
+    {% endif %}
+    {{ form_widget(formComment.content, { 'attr': {
+        'rows' : '5',
+        }} ) }}
+    {{ form_row(formComment.submit) }}
+    {{ form_end(formComment, {'render_rest': false}) }}
+</div>

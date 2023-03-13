@@ -1,0 +1,137 @@
+<div class="header-connected d-flex justify-content-around fixed-top">
+    <div class="logo-makesense">
+        <a href="{{ path('app_home') }}">
+            <img src="{{ asset('build/images/logo-makesense-dark.png') }}" alt="">
+        </a>
+    </div>
+    <div class="d-flex justify-content-end me-3 right-header">
+        <div class="dropdown p3-user-dropdown-tel">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                <i class="fas fa-user"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ path('app_home') }}">Home Page / All decisions</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_user_decisions') }}">My decisions</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_create_decision_step1') }}">Create decision</a></li>
+                {% for role in app.user.roles %}
+                    {% if role == 'ROLE_ADMIN' %}
+                        <li>
+                            <a href="{{ path('admin') }}" class="dropdown-item">Admin</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="w-100 d-none d-lg-block d-lg-flex">
+            <div class="p3-user-list justify-content-around">
+                <ul class="">
+                    <div class="d-flex justify-content-center flex-column align-items-center">
+                        <a href="{{ path('app_home') }}">
+                            <i class="fas fa-home d-flex justify-content-center"></i>
+                            <li>All decisions</li>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center flex-column ">
+                        <a href="{{ path('app_user_decisions') }}">
+                            <i class="fas fa-file d-flex justify-content-center"></i>
+                            <li>My decisions</li>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center flex-column ">
+                        <a href="{{ path('app_create_decision_step1') }}">
+                            <i class="fa-solid fa-file-circle-plus d-flex justify-content-center"></i>
+                            <li>New decision</li>
+                        </a>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="d-flex justify-content-around w-25 align-items-center notification-and-user-dropdown">
+                <div class="dropdown notification-dropdown me-3">
+                    {% set count = 0 %}
+                    {% for associate in app.user.associateds %}
+                        {% if associate.isChecked == '0' %}
+                            {% set count = count + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    <button type="button"
+                            class="btn dropdown-toggle bg-light rounded-5"
+                            data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-bell  {% if count > 0 %}bell-active{% endif %}"></i>
+                        ({{ count }})
+                    </button>
+                    <ul class="dropdown-menu">
+
+                        {% for associate in app.user.associateds %}
+                            {% if associate.isChecked == "0" %}
+                                <li class="my-2">
+                                    <a href="{{ path('bool_to_true', { id : associate.decision.id }) }}"
+                                       class="dropdown-item">
+                                        {% if associate.status == 'Expert' and associate.decision.status.name == "Late decision" %}
+                                            <p>A decision in which you are an expert is late!</p>
+                                        {% elseif associate.status == 'Expert' %}
+                                            <p>You have been designated as an expert in a new decision</p>
+                                        {% elseif associate.status == 'Impacted' %}
+                                            <p>You have been designated as an impacted person in a new decision</p>
+
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                {% if not loop.last %}
+                                    <hr>
+                                {% endif %}
+
+                            {% endif %}
+                        {% endfor %}
+                        {% if count == 0 %}
+                            <li class="dropdown-item disabled">No notification</li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="dropdown d-flex align-items-center">
+                    <button
+                        class="btn btn-secondary dropdown-toggle d-flex justify-content-between align-items-center btn-without-bg rounded-5 p-0 pe-2"
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {% if app.user.avatar == null %}
+                            <div
+                                class="avatar-per-default d-flex justify-content-center align-items-center rounded-circle">
+                                <i class="fas fa-user me-1 "></i>
+                            </div>
+                        {% else %}
+
+                            <img src="{{ asset('build/images/'~app.user.avatar) }}" height="40" width="40"
+                                 alt="avatar" class="rounded-circle"/>
+
+                        {% endif %}
+                        <div class="mx-2">
+                            {{ app.user.firstname }}
+                        </div>
+
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_user_show', {'id': app.user.id}) }}">My
+                                account</a>
+                        </li>
+                        {% for role in app.user.roles %}
+                            {% if role == 'ROLE_ADMIN' %}
+                                <li>
+                                    <a href="{{ path('admin') }}" class="dropdown-item">Admin</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

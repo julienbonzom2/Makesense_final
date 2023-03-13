@@ -1,0 +1,6 @@
+{% for decision in decisionsCanceled %}
+{#    {% if decision.status.name == 'Décision non aboutie' %}#}
+    {% include 'home/blockForOneDecision.html.twig' %}
+
+    {#    {% endif %}#}
+{% endfor %}

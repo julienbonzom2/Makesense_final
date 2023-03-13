@@ -1,0 +1,10 @@
+{% extends 'email/layout.html.twig' %}
+
+{% block body_email %}
+        <div class =body_mail>
+            <h1>Hello {{ userFirstName }} {{ userLastName }}</h1>
+            <br><br>
+            <h3>Someone has given a comment about your decision</h3>
+            <a href="http://localhost:8000{{ path('decision_show', { slug : linkDecision }) }}">Click here to see the decision</a>
+        </div>
+{% endblock %}

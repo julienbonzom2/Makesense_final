@@ -1,0 +1,8 @@
+{% extends 'email/layout.html.twig' %}
+
+{% block body_email %}
+    <h1>Une décision a été créée !</h1>
+    <h3>Merci de donner votre avis {{ userFirstName }} {{ userLastName }} <i>{{ userEmail }}</i></h3>
+    <br>
+    <a href="http://localhost:8000{{ path('decision_show', { slug : linkDecision }) }}">Cliquez ici pour aller voir la décision</a>
+{% endblock %}

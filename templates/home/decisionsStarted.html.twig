@@ -1,0 +1,6 @@
+{% for decision in decisionsStarted %}
+{#    {% if decision.status.name == 'Décision commencée' %}#}
+    {% include 'home/blockForOneDecision.html.twig' %}
+
+    {#    {% endif %}#}
+{% endfor %}

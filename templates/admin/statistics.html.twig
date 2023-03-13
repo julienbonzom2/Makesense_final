@@ -1,0 +1,81 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content %}
+    <section id="main" class="content-body" style="z-index: 2;">
+        <div class="content-header">
+            <h1>Statistics</h1>
+        </div>
+        <h2 class="text-center mt-2">Decisions created by trimesters</h2>
+        <div class="first-chart">
+            {{ render_chart(barChart) }}
+        </div>
+
+        <div class="d-flex justify-content-around mt-5">
+            <div class="w-50 ">
+                <h2 class="text-center">Decisions sorted by their status over the last 30 days</h2>
+                <div class="w-75 mx-auto second-chart">
+                    <div class="mx-auto d-flex labels-for-multiple-chart">
+                        <div class="d-flex align-items-center">
+                            <div class="first-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision started</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="second-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">1st decision</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="third-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision in conflict</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="fourth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Final decision</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="fifth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision cancelled</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="sixth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision taken</p>
+                        </div>
+                    </div>
+                    {{ render_chart(pieChart) }}
+                </div>
+            </div>
+            <div class="w-50">
+                <h2 class="text-center">Conversion rate from each status</h2>
+                <div class="w-75 mx-auto third-chart">
+                    <div class="mx-auto d-flex labels-for-multiple-chart">
+                        <div class="d-flex align-items-center">
+                            <div class="first-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision started</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="second-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">1st decision</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="third-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision in conflict</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="fourth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Final decision</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="fifth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision cancelled</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="sixth-bg-color label-a-la-mano"></div>
+                            <p class="mb-0 ms-2">Decision taken</p>
+                        </div>
+                    </div>
+                    {{ render_chart(multiplePieChart) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

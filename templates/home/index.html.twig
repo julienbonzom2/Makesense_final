@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        {% include 'home/homeConnected.html.twig' %}
+    {% else %}
+        {% include 'home/homeNotConnected.html.twig' %}
+    {% endif %}
+{% endblock %}

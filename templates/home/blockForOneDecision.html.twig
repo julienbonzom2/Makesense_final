@@ -1,0 +1,61 @@
+   <a href="{{ path('decision_show' , { slug : decision.slug}) }}">
+    <div class="box-for-decision me-3">
+        <div class="header-box-for-decision h-25">
+            <div class="header-box-for-decision-left">
+                <p>{{ decision.status.name }}</p>
+            </div>
+            <div class="header-box-for-decision-right d-flex justify-content-center align-items-center">
+                <img src="{{ asset('build/images/'~decision.author.nationality.flag) }}" alt="" width="25" height="25">
+            </div>
+        </div>
+        <div class="body-box-for-decision h-75">
+            <div>
+                <div class="d-flex">
+                    <p class="ms-2 mt-2 mb-0">{{ decision.category.categoryName }}</p>
+                    <p class="votes-text ms-3 mt-2 mb-0"><span class="favor-vote-count">{{ decision.inFavorVotes }}</span><i class="fa-solid fa-thumbs-up thumb-up-icon ms-2 me-2"></i><span class="not-favor-vote-count">{{ decision.notInFavorVotes }}</span><i class="fa-solid fa-thumbs-down thumb-down-icon ms-2"></i></p>
+                </div>
+
+                <p class="ms-2 mt-2 mb-0">{{ decision.title }}</p>
+            </div>
+            <div class="footer-box-for-decision d-flex justify-content-between">
+                <div class="w-75">
+                    {% if decision.author.avatar == null %}
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-per-default d-flex justify-content-center align-items-center">
+                                <i class="fa fa-user ms-2"></i>
+                            </div>
+                            <i class="ms-2">by
+                                <strong>{{ decision.author.firstname }} {{ decision.author.lastname }}</strong>
+                            </i>
+                        </div>
+                    {% else %}
+                        <div class="d-flex align-items-center ms-2">
+                            <img src="{{ asset('build/images/'~decision.author.avatar ) }}" alt="" height="40"
+                                 width="40" class="rounded-circle">
+                            <i class="ms-2">by
+                                <strong>{{ decision.author.firstname }} {{ decision.author.lastname }}</strong></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="w-25 bell-impacted-or-expert">
+                    {% for associate in decision.associateds %}
+                        {% if app.user.id == associate.user.id %}
+                            <i class="fad fa-bell-exclamation avis-or-comment {% if associate.status == 'Impacted' %}
+                            impacted {% else %} expert {% endif %}">
+                                <span class="tooltiptext">
+                                    {% if associate.status == 'Impacted' %}
+                                        Comment needed
+                                    {% else %}
+                                        Opinion needed
+                                    {% endif %}
+                                </span>
+                            </i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+
+

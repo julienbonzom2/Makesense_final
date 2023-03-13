@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        <div class="header-container">
+            {% include '_header/headerConnected.html.twig' %}
+        </div>
+        <div class="w-75 d-flex justify-content-around mx-auto">
+            <div class="search-bar-decisions mx-auto">
+                {{ form_start(form) }}
+                {{ form_label(form.search) }}
+                {{ form_errors(form.search) }}
+                <div class="d-flex w-75 mt-2 mx-auto">
+                    {{ form_widget(form.search) }}
+
+                    <button value="Submit" type="submit" class="btn p3-form-connexion-btn ms-2">Search</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+            <div class="w-25 d-flex justify-content-around align-items-center">
+                <a href="{{ path('app_hub_lang', { lang : 'fr'}) }}" class="rounded-circle">
+                    <img src="{{ asset('build/images/la-france.png') }}" alt="french hub" height="40" width="40">
+                </a>
+                <a href="{{ path('app_hub_lang', { lang : 'en'}) }}" class="rounded-circle">
+                    <img src="{{ asset('build/images/royaume-uni.png') }}" alt="english hub" height="40" width="40">
+                </a>
+                <a href="{{ path('app_hub_lang', { lang : 'es'}) }}" class="rounded-circle">
+                    <img src="{{ asset('build/images/espagne.png') }}" alt="espagnol hub" height="40" width="40">
+                </a>
+            </div>
+        </div>
+        <div class="all-decisions">
+            <h3>Decision searched</h3>
+            <hr class="p3-separateur">
+            <div class="all-decisions-display">
+                {% for decision in decisions %}
+                    {% include 'home/blockForOneDecision.html.twig' %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,85 @@
+<div class="all-decisions">
+    <h3>My draft decisions</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if draftDecisions is not empty %}
+            {% for decision in draftDecisions %}
+                <a href="{{ path('app_create_decision_step'~decision.currentStep, { id : decision.id}) }}">
+                    <div class="box-for-decision me-3">
+                        <div class="header-box-for-decision h-25">
+                            <div class="header-box-for-decision-left">
+                                <p>Decision in draft</p>
+                            </div>
+                            <div class="header-box-for-decision-right d-flex justify-content-center align-items-center">
+                                <img src="{{ asset('build/images/'~decision.ongoingAuthor.nationality.flag) }}" alt=""
+                                     width="25" height="25">
+                            </div>
+                        </div>
+                        <div class="body-box-for-decision h-75">
+                            <div>
+                                <p class="ms-2 mt-2 mb-0">
+                                    {% if decision.category.categoryName %}
+                                        {{ decision.category.categoryName }}
+                                    {% else %}
+                                        Category not defined
+                                    {% endif %}
+                                </p>
+                                <p class="ms-2 mt-2 mb-0">
+                                    {% if decision.ongoingTitle %}
+                                        {{ decision.ongoingTitle }}
+                                    {% else %}
+                                        Title not defined
+                                    {% endif %}
+                                </p>
+
+                            </div>
+
+                            <div class="footer-box-for-decision d-flex justify-content-between">
+                                <div class="w-75">
+                                    {% if decision.ongoingAuthor.avatar == null %}
+                                        <div class="d-flex align-items-center">
+                                            <div
+                                                class="avatar-per-default d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-user ms-2"></i>
+                                            </div>
+                                            <i class="ms-2">by
+                                                <strong>{{ decision.ongoingAuthor.firstname }} {{ decision.ongoingAuthor.lastname }}</strong>
+                                            </i>
+                                        </div>
+                                    {% else %}
+                                        <div class="d-flex align-items-center ms-2">
+                                            <img src="{{ asset('build/images/'~decision.ongoingAuthor.avatar ) }}"
+                                                 class="rounded-circle"
+                                                 alt=""
+                                                 height="50"
+                                                 width="50">
+                                            <i class="ms-2">by
+                                                <strong>{{ decision.ongoingAuthor.firstname }} {{ decision.ongoingAuthor.lastname }}</strong></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="w-25 bell-impacted-or-expert">
+                                    {% for associate in decision.ongoingAssociateds %}
+                                        {% if app.user.id == associate.user.id %}
+                                            <i class="fad fa-bell-exclamation avis-or-comment">
+                                <span class="tooltiptext">
+                                    {% if associate.status == 'Impacted' %}
+                                        Comment needed
+                                    {% else %}
+                                        Notice needed
+                                    {% endif %}
+                                </span>
+                                            </i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <h4>You have not started any decisions yet</h4>
+        {% endif %}
+    </div>
+</div>

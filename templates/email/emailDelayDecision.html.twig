@@ -1,0 +1,13 @@
+{% extends 'email/layout.html.twig' %}
+
+{% block body_email %}
+    <img src="{{ asset('build/images/logo-makesense-dark.png') }}" alt="">
+    <h1>The status of your decision has been updated.</h1>
+    <h3>Hello !</h3>
+    <p>An admin modified the status of your decision to "Delay in the process".
+        This is because your decision has been created or updated since more than 30 days, and is therefore considered late.</p>
+    <p>If you are still waiting for people to give their opinions before updating your decision, no worries, they  will receive a notification inviting them to post their opinion.</p>
+    <br>
+    <a href="http://localhost:8000{{ path('decision_show', { slug : linkDecision }) }}">Click here to see the decision</a>
+
+{% endblock %}

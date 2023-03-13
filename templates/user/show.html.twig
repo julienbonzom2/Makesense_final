@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="header-container">
+        {% include '_header/headerConnected.html.twig' %}
+    </div>
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100 ">
+            <div class="row d-flex justify-content-center align-items-center margin-profil-block">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <div class="row g-0">
+                            <div class="col-md-4 gradient-custom text-center"
+                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                {% if app.user.avatar == null %}
+                                <div class="img-fluid my-5 rounded-circle" id="block_avatar_first">
+                                <i class="fa-solid fa-user fa-4x" style="width: 80px; height: 80px"></i>
+                            </div>
+                                {% else %}
+                                    <img src="{{ asset('build/images/' ~ app.user.avatar) }}" class="img-fluid my-5 rounded-circle" style="width: 80px;" alt="avatar"/>
+                                {% endif %}
+                                <div>
+                                <h5>{{ user.lastname }}</h5>
+                                <p class="margin_name_profil">{{ user.firstname }}</p>
+                                </div>
+
+                                <div class="button_delete_account">
+                                    {{ include('user/_delete_form.html.twig') }}
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <div class="flex_button_delete">
+                                    <h6>Information</h6>
+                                    </div>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-8 mb-3">
+                                            <h6>Email</h6>
+                                            <p class="text-muted">{{ user.email }}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Lastname</h6>
+                                            <p class="text-muted">{{ user.lastname }}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Firstname</h6>
+                                            <p class="text-muted">{{ user.firstname }}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Created at</h6>
+                                            <p class="text-muted">{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Nationality</h6>
+                                            <p class="text-muted">{{ user.nationality }}</p>
+                                        </div>
+                                    </div>
+                                    <div  class="btn button-classic">
+                                        <a href="{{ path('app_user_edit', {'id': user.id}) }}">Update your Profil</a>
+                                    </div>
+                                    <div  class="btn button-classic">
+                                        <a href="{{ path('app_user_modifyPassword', {'id': user.id}) }}">Modify your Passsword</a>
+                                    </div>
+                                    <div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

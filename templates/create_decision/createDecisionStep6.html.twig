@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CreateDecisionController!{% endblock %}
+
+{% block body %}
+    <div class="header-container">
+        {% include '_header/headerConnected.html.twig' %}
+    </div>
+    <div class="d-flex container justify-content-between mt-4">
+        <div class="d-flex flex-column step-process col-4 mt-4">
+            {% include 'create_decision/stepVisualisation.html.twig' %}
+        </div>
+        <div class="d-flex flex-column col-4">
+        </div>
+        <div class=" d-flex flex-column creation-form col-7 justify-content-end">
+            <h1 class="creation-section-title">Summary</h1>
+            <div class="accordion-item">
+                <div class="accordion-item-header d-flex justify-content-between decision-summary-header-accordion">
+                    <div class="">
+                        <i class="accordion-icon"></i>
+                        <h2 class="accordion-item-title">Title, category, problematic</h2>
+                    </div>
+                    <a href="{{ path('app_create_decision_step1', { id: decision.id }) }}" class="align-self-center me-2">
+                        <button type="button" class="btn section-back-button">Go back to this section</button>
+                    </a>
+                </div>
+                <div class="accordion-body-block">
+                    <h4 class="summary-creation-section-title mt-2">Title</h4>
+                    <p class="summary-text">{{ decision.ongoingTitle }}</p>
+                    <div class="d-flex">
+                        <h4 class="summary-creation-section-title mt-2">Category</h4>
+                        <h5 class="summary-text m-0 align-self-center ms-4 mt-1 summary-category">{{ decision.category }}</h5>
+                    </div>
+                    <h4 class="summary-creation-section-title mt-2">Problematic</h4>
+                    {{ decision.ongoingProblem | raw }}
+
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-item-header d-flex justify-content-between decision-summary-header-accordion">
+                    <div class="">
+                        <i class="accordion-icon"></i>
+                        <h2 class="accordion-item-title">Description</h2>
+                    </div>
+                    <a href="{{ path('app_create_decision_step2', { id: decision.id }) }}" class="align-self-center me-2">
+                        <button type="button" class="btn section-back-button">Go back to this section</button>
+                    </a>
+                </div>
+                <div class="accordion-body-block">
+                    {{ decision.ongoingDescription | raw }}
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-item-header d-flex justify-content-between decision-summary-header-accordion">
+                    <div class="">
+                        <i class="accordion-icon"></i>
+                        <h2 class="accordion-item-title">Infos</h2>
+                    </div>
+                    <a href="{{ path('app_create_decision_step3', { id: decision.id }) }}" class="align-self-center me-2">
+                        <button type="button" class="btn section-back-button">Go back to this section</button>
+                    </a>
+                </div>
+                <div class="accordion-body-block">
+                    <h4 class="summary-creation-section-title mt-2">Rates</h4>
+                    <div class="d-flex">
+                        <h6 class="summary-infos-title p-1">Effort</h6>
+                        <p class="summary-rate-text">{{ decision.ongoingEffortRate }}</p>
+                    </div>
+                    <div class="d-flex">
+                        <h6 class="summary-infos-title p-1">Impact</h6>
+                        <p class="summary-rate-text">{{ decision.ongoingImpactRate }}</p>
+                    </div>
+
+
+                    <h4 class="summary-creation-section-title mt-2">Profit and Drawback</h4>
+                    <h6 class="summary-infos-title p-1">Profit</h6>
+                    <p>{{ decision.ongoingProfit | raw }}</p>
+                    <h6 class="summary-infos-title p-1">Drawback</h6>
+                    <p>{{ decision.ongoingDrawback | raw }}</p>
+
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-item-header d-flex justify-content-between decision-summary-header-accordion">
+                    <div class="">
+                        <i class="accordion-icon"></i>
+                        <h2 class="accordion-item-title">People impacted</h2>
+                    </div>
+                    <a href="{{ path('app_create_decision_step4', { id: decision.id }) }}" class="align-self-center me-2">
+                        <button type="button" class="btn section-back-button">Go back to this section</button>
+                    </a>
+                </div>
+                <div class="accordion-body-block">
+                    <div class="d-flex flex-wrap">
+                        {% for associated in impacteds %}
+                            <div class="d-flex flex-wrap user-display">
+                                <img src="{{ asset('build/images/'~associated.avatar) }}" alt="" class="form-avatar-image"/>
+                                {{ associated.firstname }} {{ associated.lastname }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-item-header d-flex justify-content-between decision-summary-header-accordion">
+                    <div class="">
+                        <i class="accordion-icon"></i>
+                        <h2 class="accordion-item-title">Experts</h2>
+                    </div>
+                    <a href="{{ path('app_create_decision_step5', { id: decision.id }) }}" class="align-self-center me-2">
+                        <button type="button" class="btn section-back-button">Go back to this section</button>
+                    </a>
+                </div>
+                <div class="accordion-body-block">
+                    <div class="d-flex flex-wrap">
+                        {% for associated in experts %}
+                            <div class="d-flex flex-wrap user-display">
+                                <img src="{{ asset('build/images/'~associated.avatar) }}" alt="" class="form-avatar-image"/>
+                                {{ associated.firstname }} {{ associated.lastname }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_start(form) }}
+            <div class="navigation-buttons d-flex justify-content-between mt-3">
+                <div class="d-flex g-5">
+                    <a
+                        href="{{ path('app_create_decision_step5', { id: decision.id }) }}">
+                        <button type="button" class="btn back-button">Back</button>
+                    </a>
+                    <a href="#">
+                        <button type="button" class="btn ms-2 later-button" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Come back later</button>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <button type="button" class="btn ms-2 submit-button" data-bs-toggle="modal"
+                                data-bs-target="#confirmModal">Confirm</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are your sure ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ form_row(form.Confirm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+{% block footer %}
+        {% include '_header/footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+{#    <div class="mt-2 test">#}
+{#        <img src="{{ asset('build/images/logo-makesense-dark.png') }}" alt="" class="logo-makesense-model-tel">#}
+{#    </div>#}
+
+{#    <div class="p3-connexion-inscription-title-for-register">#}
+{#        <div class="p3-connexion-title-for-register">#}
+{#            <a href="{{ path('app_login') }}">#}
+{#                <h2 class="">Sign in</h2>#}
+{#            </a>#}
+{#        </div>#}
+{#        <div class="p3-inscription-title-for-register">#}
+{#            <a href="{{ path('app_register') }}">#}
+{#                <h2 class="p3-active">Register</h2>#}
+{#            </a>#}
+{#        </div>#}
+{#    </div>#}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+<div class="register-form back">
+    {{ form_start(registrationForm, { attr : { class : 'w-100'}}) }}
+    <div class="p3-register-form col-md-10 col-lg-8 col-xl-6">
+        <div class="mt-2 test">
+            <img src="{{ asset('build/images/logo-makesense-dark.png') }}" alt="" class="logo-makesense-model-tel">
+        </div>
+        <div class="p3-connexion-inscription-title d-flex gap-3 mt-2">
+            <div class="p3-connexion-title">
+                <a href="{{ path('app_login') }}">
+                    <h2 class="p3-inactive">Sign in</h2>
+                </a>
+            </div>
+            <div class="p3-inscription-title">
+                <a href="{{ path('app_register') }}">
+                    <h2 class="p3-active">Register</h2>
+                </a>
+            </div>
+        </div>
+        <div class="avatar_block">
+
+            <div class="avatar_window rounded-circle" id="block_avatar_first">
+                <i class="fa-solid fa-user fa-8x preview_avatar" style="width: 160px; height: 160px"></i>
+            </div>
+            <div class="avatar_window rounded-circle hidden " id="block_avatar_preview">
+                <i class="bi bi-person-circle"></i>
+                <img id="file-ip-1-preview"  style="width: 160px;"  class="rounded-circle shadow">
+
+            </div>
+            <div class ="avatar_choice_file">
+                {{ form_errors(registrationForm.avatar, { attr : { class : "inputfile"}}) }}
+                {{ form_widget(registrationForm.avatar, { attr : { class : "inputfile", onchange : "showPreview(event)"}}) }}
+            </div>
+            <script>
+                function showPreview(event)
+                {
+
+                    if (event.target.files.length > 0) {
+                        document.getElementById('block_avatar_first').classList.add("hidden");
+                        document.getElementById('block_avatar_preview').classList.remove("hidden");
+                        var src = URL.createObjectURL(event.target.files[0]);
+                        var preview = document.getElementById("file-ip-1-preview");
+                        preview.src = src;
+                        preview.style.display = "block";
+                    }
+                }
+            </script>
+        </div>
+        <div class="registration-form-container col-md-10 col-lg-8 col-xl-6 mx-auto">
+            {# Email #}
+            <div class="label_registration">
+                {{ form_label(registrationForm.email)}}
+                {{ form_errors(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, { attr : { class : "form-control mb-2 input_registration input-general-styling"}}) }}
+            </div>
+            {# End Email #}
+
+            {# Firstname #}
+            <div class="label_registration">
+                {{ form_label(registrationForm.firstname) }}
+                {{ form_errors(registrationForm.firstname) }}
+                {{ form_widget(registrationForm.firstname, { attr : { class : "form-control mb-2 input_registration input-general-styling"}}) }}
+            </div>
+            {# EndFirstname #}
+
+            {# Lastname #}
+            <div class="label_registration">
+                {{ form_label(registrationForm.lastname) }}
+                {{ form_errors(registrationForm.lastname) }}
+                {{ form_widget(registrationForm.lastname, { attr : { class : "form-control mb-2 input_registration input-general-styling"}}) }}
+            </div>
+            {# End lastname #}
+
+            {# Nationality #}
+            <div class="label_registration">
+                {{ form_label(registrationForm.nationality) }}
+                {{ form_errors(registrationForm.nationality) }}
+                {{ form_widget(registrationForm.nationality, { attr : { class : "form-control mb-2 input_registration input-general-styling"}}) }}
+            </div>
+            {# End nationality #}
+
+
+            {# Created at #}
+            {#            {{ form_row(registrationForm.createdAt) }} #}
+            {# End created at #}
+
+            <div class="label_registration">
+                {# Password #}
+                {#            {{ form_label(registrationForm.password.first_options) }} #}
+                {{ form_errors(registrationForm.password) }}
+                {{ form_widget(registrationForm.password,  { attr : { class : "input_registration input-general-styling"}}) }}
+                {# End password #}
+            </div>
+
+            <div class="label_registration ">
+                {{ form_label(registrationForm.agreeTerms) }}
+                {{ form_errors(registrationForm.agreeTerms) }}
+                {{ form_widget(registrationForm.agreeTerms, { attr : { class : "agree_terms"}}) }}
+            </div>
+
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-lg p3-form-connexion-btn register_button submit-button">Register</button>
+            </div>
+        </div>
+
+    </div>
+
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

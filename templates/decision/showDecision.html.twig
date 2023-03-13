@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Decision{% endblock %}
+
+{% block body %}
+    <div class="header-container">
+        {% include '_header/headerConnected.html.twig' %}
+    </div>
+    <div class="container">
+        <div class="row mt-5 d-flex flex-row panels-container">
+            <div class="col-xl-8 col-lg-9 col-md-9 decision-details-block">
+                <div class="d-flex justify-content-between decision-details-tags">
+                    <p class="decision-details-status px-3">{{ decision.status }}</p>
+                </div>
+                <h1 class="decision-details-title">{{ decision.title }}</h1>
+                {% if decision.author.avatar == null %}
+                    <i class="fas fa-user fa-4x decision-details-avatar-author"></i>
+                {% else %}
+                    <img src="{{ asset('build/images/'~decision.author.avatar) }}" height="80" width="80"
+                         class="decision-details-avatar-author"
+                         alt="avatar"/>
+                {% endif %}
+                <span
+                    class="decision-details-author-by">by</span> <span
+                    class="decision-details-author-names">{{ decision.author.firstName }} {{ decision.author.lastName }}<img
+                        src="{{ asset('build/images/'~decision.author.nationality.flag) }}"
+                        class="decision-details-flag ms-3" alt="" height="25" width="25"></span>
+                <div class="decision-details-accordion mt-4">
+                    <div class="accordion-item first-accordion-item">
+                        <div class="accordion-item-header">
+                            <i class="accordion-icon"></i>
+                            <h4 class="accordion-item-title">The problem the decision target</h4>
+                        </div>
+                        <div class="accordion-body-block">
+                            <p class="accordion-body-text">{{ decision.problem | raw }}</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-item-header">
+                            <i class="accordion-icon"></i>
+                            <h4 class="accordion-item-title">Details of the decision</h4>
+                        </div>
+                        <div class="accordion-body-block">
+                            <p class="effort-impact-ratings mt-3">Effort rate <span
+                                    class="effort-rate-value summary-rate-text ms-2 me-2">  {{ decision.effortRate }}</span> |  Impact rate <span
+                                    class="impact-rate-value summary-rate-text ms-2">  {{ decision.impactRate }}</span></p>
+                            <p class="accordion-body-text">{{ decision.description | raw }}</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-item-header">
+                            <i class="accordion-icon"></i>
+                            <h4 class="accordion-item-title">Profit</h4>
+                        </div>
+                        <div class="accordion-body-block">
+                            <p class="accordion-body-text">{{ decision.profit | raw }}</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-item-header">
+                            <i class="accordion-icon"></i>
+                            <h4 class="accordion-item-title">Drawback</h4>
+                        </div>
+                        <div class="accordion-body-block">
+                            <p class="accordion-body-text">{{ decision.drawback | raw }}</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="link-to-comments">
+                        <div class="accordion-item-header accordion">
+                            <i class="accordion-icon"></i>
+                            <h5 class="accordion-item-title fw-light">
+                                Comments {% if commentsOnStartedDecision is not empty %}({{ commentsOnStartedDecision | length }}){% endif %}</h5>
+                        </div>
+                        <div class="accordion-body-block pe-0">
+                            {% for comment in commentsOnStartedDecision %}
+                                {% include 'decision/commentsList.html.twig' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="link-to-opinions">
+                        <div class="accordion-item-header">
+                            <i class="accordion-icon"></i>
+                            <h5 class="accordion-item-title fw-light">
+                                Opinions {% if opinionOnStartedDecision is not empty %}({{ opinionOnStartedDecision | length }}){% endif %}</h5>
+                        </div>
+                        <div class="accordion-body-block pe-0">
+                            {% for comment in opinionOnStartedDecision %}
+                                {% include 'decision/commentsList.html.twig' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if decision.status == 'First decision' or decision.status == 'Final decision' or decision.status == 'Decision in conflict' %}
+                        <div class="accordion-item">
+                            <div class="accordion-item-header">
+                                <i class="accordion-icon"></i>
+                                <h4 class="accordion-item-title">First decision description</h4>
+                            </div>
+                            <div class="accordion-body-block">
+                                <p class="accordion-body-text">{{ decision.firstDecision | raw }}</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="link-to-comments">
+                            <div class="accordion-item-header accordion">
+                                <i class="accordion-icon"></i>
+                                <h5 class="accordion-item-title fw-light">
+                                    Comments on the first
+                                    decision {% if commentsOnFirstDecision is not empty %}({{ commentsOnFirstDecision | length }}){% endif %}</h5>
+                            </div>
+                            <div class="accordion-body-block pe-0">
+                                {% for comment in commentsOnFirstDecision %}
+                                    {% include 'decision/commentsList.html.twig' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="link-to-opinions">
+                            <div class="accordion-item-header">
+                                <i class="accordion-icon"></i>
+                                <h5 class="accordion-item-title fw-light">
+                                    Opinions on the first
+                                    decision {% if opinionOnFirstDecision is not empty %}({{ opinionOnFirstDecision | length }}){% endif %}</h5>
+                            </div>
+                            <div class="accordion-body-block pe-0">
+                                {% for comment in opinionOnFirstDecision %}
+                                    {% include 'decision/commentsList.html.twig' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if decision.status == 'Final decision' %}
+                        <div class="accordion-item">
+                            <div class="accordion-item-header">
+                                <i class="accordion-icon"></i>
+                                <h4 class="accordion-item-title">Final decision description</h4>
+                            </div>
+                            <div class="accordion-body-block">
+                                <p class="accordion-body-text">{{ decision.finalDecision | raw }}</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="link-to-comments">
+                            <div class="accordion-item-header accordion">
+                                <i class="accordion-icon"></i>
+                                <h5 class="accordion-item-title fw-light">
+                                    Comments on the final
+                                    decision {% if commentsOnFinalDecision is not empty %}({{ commentsOnFinalDecision | length }}){% endif %}</h5>
+                            </div>
+                            <div class="accordion-body-block pe-0">
+                                {% for comment in commentsOnFinalDecision %}
+                                    {% include 'decision/commentsList.html.twig' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="accordion-item" id="link-to-opinions">
+                            <div class="accordion-item-header">
+                                <i class="accordion-icon"></i>
+                                <h5 class="accordion-item-title fw-light">
+                                    Opinions on the final decision
+                                    {% if opinionOnFinalDecision is not empty %}({{ opinionOnFinalDecision | length }}){% endif %}</h5>
+                            </div>
+                            <div class="accordion-body-block pe-0">
+                                {% for comment in opinionOnFinalDecision %}
+                                    {% include 'decision/commentsList.html.twig' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if status == 'Impacted' %}
+                    {% include 'decision/commentsSection.html.twig' %}
+                {% endif %}
+                {% if status == 'Expert' %}
+                    {% include 'decision/opinionSection.html.twig' %}
+                {% endif %}
+                {% if app.user == decision.author and opinionOnStartedDecision | length > 0 and (decision.status == 'Decision started') %}
+                    <div class="first-decision-form">
+                        {% include 'decision/firstDecisionSection.html.twig' %}
+                    </div>
+                {% elseif app.user == decision.author and opinionOnFirstDecision| length > 0 and decision.status == 'First decision' %}
+                    <div class="first-decision-form">
+                        {% include 'decision/firstDecisionSection.html.twig' %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="side-panel col-xl-4 col-lg-3 col-md-3">
+                {% include 'decision/showSidePanel.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

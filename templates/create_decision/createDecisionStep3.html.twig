@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CreateDecisionController!{% endblock %}
+
+{% block body %}
+    <div class="header-container">
+        {% include '_header/headerConnected.html.twig' %}
+    </div>
+
+    <div class="d-flex container justify-content-between mt-4">
+        <div class="d-flex flex-column step-process col-4 mt-4">
+            {% include 'create_decision/stepVisualisation.html.twig' %}
+        </div>
+        <div class="d-flex flex-column col-4">
+        </div>
+        <div class="d-flex flex-column creation-form col-7">
+            <h1 class="creation-section-title">Infos</h1>
+            {{ form_start(form) }}
+            {{ form_label(form.ongoingImpactRate) }}
+            <div class="form_error">
+                {{ form_errors(form.ongoingImpactRate) }}
+            </div>
+            {{ form_widget(form.ongoingImpactRate) }}
+
+            {{ form_label(form.ongoingEffortRate) }}
+            <div class="form_error">
+                {{ form_errors(form.ongoingEffortRate) }}
+            </div>
+            {{ form_widget(form.ongoingEffortRate) }}
+
+            {{ form_label(form.ongoingProfit) }}
+            <div class="form_error">
+                {{ form_errors(form.ongoingProfit) }}
+            </div>
+            {{ form_widget(form.ongoingProfit) }}
+
+            {{ form_label(form.ongoingDrawback) }}
+            <div class="form_error">
+                {{ form_errors(form.ongoingDrawback) }}
+            </div>
+            {{ form_widget(form.ongoingDrawback) }}
+            <div class="navigation-buttons d-flex justify-content-between mt-3">
+                <div class="d-flex g-5">
+                    <a
+                        href="{{ path('app_create_decision_step2', { id: decision.id }) }}">
+                        <button type="button" class="btn back-button">Back</button>
+                    </a>
+                        <button type="button" class="btn ms-2 later-button" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Come back later</button>
+                </div>
+                <div class="">
+                    {% if decision.currentStep == '5' %}
+                        <button type="submit" class=" btn submit-button d-flex float-end">To confirmation</button>
+                    {% else %}
+                        <button type="submit" class=" btn submit-button d-flex float-end">Next</button>
+                    {% endif %}
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are your sure ?
+                    Please be aware that you will lose what you wrote in this current step,
+                    but everything you wrote in previous steps is saved.<br>
+                    Remember that this draft wll be deleted after 10 days without any modifications.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ path('app_user_decisions') }}">
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,103 @@
+<div class="header-container">
+    {% include '_header/headerConnected.html.twig' %}
+</div>
+<div class="w-25 mx-auto d-flex justify-content-around align-items-center mb-3 flex-column">
+    <div>
+        <h4 class="creation-section-title mb-2">Select a hub</h4>
+    </div>
+    <div class="w-100 d-flex justify-content-evenly mb-2">
+        <a href="{{ path('app_hub_lang', { lang : 'fr'}) }}" class="rounded-circle">
+            <img src="{{ asset('build/images/la-france.png') }}" alt="french hub" height="40" width="40">
+        </a>
+        <a href="{{ path('app_hub_lang', { lang : 'en'}) }}" class="rounded-circle">
+            <img src="{{ asset('build/images/royaume-uni.png') }}" alt="english hub" height="40" width="40">
+        </a>
+        <a href="{{ path('app_hub_lang', { lang : 'es'}) }}" class="rounded-circle">
+            <img src="{{ asset('build/images/espagne.png') }}" alt="espagnol hub" height="40" width="40">
+        </a>
+    </div>
+</div>
+<div class="mt-1">
+    <div class="">
+        {{ form_start(form) }}
+        {{ form_label(form.search) }}
+        {{ form_errors(form.search) }}
+        <div class="d-flex mt-2 mx-auto search-bar-decisions">
+            {{ form_widget(form.search) }}
+
+            <button value="Submit" type="submit" class="btn p3-form-connexion-btn ms-2 submit-button">Search</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+<div class="all-decisions">
+    <h3>Started decisions</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if decisionsStarted is not empty %}
+            {% include 'home/decisionsStarted.html.twig' %}
+        {% else %}
+            <h4>No decision with this status</h4>
+        {% endif %}
+    </div>
+    <h3>First decisions taken</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if firstDecisionsTaken is not empty %}
+            {% include 'home/firstDecisionsTaken.html.twig' %}
+        {% else %}
+            <h4>No decision with this status</h4>
+        {% endif %}
+    </div>
+    <h3>Decisions in conflict</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if decisionsInConflict is not empty %}
+            {% include 'home/decisionConflicted.html.twig' %}
+        {% else %}
+            <h4>No decision with this status</h4>
+        {% endif %}
+    </div>
+    <h3>Final decisions</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if decisionsDefinitive is not empty %}
+            {% include 'home/decisionsDefinitive.html.twig' %}
+        {% else %}
+            <h4>No decision with this status</h4>
+        {% endif %}
+    </div>
+    <div>
+        <h3>Cancelled decisions</h3>
+        <hr class="p3-separateur">
+        <div class="all-decisions-display">
+            {% if decisionsCanceled is not empty %}
+                {% include 'home/decisionsCanceled.html.twig' %}
+            {% else %}
+                <h4>No decision with this status</h4>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <h3>Decisions with a delay in their process</h3>
+        <hr class="p3-separateur">
+        <div class="all-decisions-display">
+            {% if decisionsCanceled is not empty %}
+                {% include 'home/decisionsLate.html.twig' %}
+            {% else %}
+                <h4>No decision with this status</h4>
+            {% endif %}
+        </div>
+    </div>
+    <h3>Decisions finalized and applied</h3>
+    <hr class="p3-separateur">
+    <div class="all-decisions-display">
+        {% if decisionsFinished is not empty %}
+            {% include 'home/decisionsFinished.html.twig' %}
+        {% else %}
+            <h4>No decision with this status</h4>
+        {% endif %}
+    </div>
+</div>
+

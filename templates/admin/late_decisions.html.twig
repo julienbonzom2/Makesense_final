@@ -1,0 +1,248 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var action \EasyCorp\Bundle\EasyAdminBundle\Dto\ActionDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% extends '@EasyAdmin/layout.html.twig' %}
+{% block content %}
+
+    <section id="main" class="content-body">
+        <section class="content-header">
+            <h1 class="late-admin-title">Decisions with a delay in their process</h1>
+        </section>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table data-grid" id="myTable2">
+
+            <thead>
+            <tr>
+                <th>
+                    <div class="form-check">
+                        <input type="hidden" class="form-check-input form-batch-checkbox-all">
+                    </div>
+                </th>
+                <th class="admin-late-table-header">Title</th>
+                <th class="admin-late-table-header">Category</th>
+                <th class="admin-late-table-header">Description</th>
+                <th class="admin-late-table-header">Comments</th>
+                <th class="admin-late-table-header">Created</th>
+                <th class="admin-late-table-header">First decision</th>
+                <th class="admin-late-table-header">Final decision</th>
+            </tr>
+            </thead>
+            <tbody>
+            <form method="post" class="update-comment-form"
+                  action="#">
+                {% for decision in startedDecisions %}
+                    <tr>
+                        <td><input type="checkbox" name="checkeboxe[]" class="late-form-check-input"
+                                   value="{{ decision.id }}"></td>
+                        <td>{{ decision.title }}</td>
+                        <td>{{ decision.category }}</td>
+                        <td><a href="#" class="link-content-admin" data-bs-toggle="modal"
+                               data-bs-target="#exampleModal{{ loop.index }}">
+                                <i class="far fa-file-alt"></i> View description
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Decision's description</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ decision.description | raw }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><a href="#" class="link-content-admin" data-bs-toggle="modal"
+                               data-bs-target="#comment-modal{{ loop.index }}">
+                                <i class="far fa-file-alt"></i> View comments and opinions
+                                ({{ decision.comments | length }})
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="comment-modal{{ loop.index }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Decision's comments and
+                                                opinions</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% for comment in decision.comments %}
+                                                <p><span
+                                                        class="decision-details-author-names">{{ comment.associated.user.firstname }} {{ comment.associated.user.lastname }}</span>,
+                                                    the {{ comment.createdAt | date("m/d/Y") }}
+                                                    {% if comment.associated.status == 'Expert' %} | Vote :  {% if comment.associated.isFavorable %}
+                                                        <i class="fa-solid fa-thumbs-up thumb-up-icon"></i>{% elseif comment.associated.isFavorable is not null %}
+                                                        <i class="fa-solid fa-thumbs-down thumb-down-icon"></i>{% endif %}{% endif %}
+                                                </p>
+                                                <p>{{ comment.content }}</p>
+                                                {% if not loop.last %}
+                                                    <hr> {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {{ decision.createdAt | date('m/d/Y') }}
+                        </td>
+                        <td>
+                            {% if decision.firstDecisionAt is not null %}
+                                {{ decision.firstDecisionAt | date('m/d/Y') }}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if decision.finalDecisionAt is not null %}
+                                {{ decision.finalDecisionAt | date('m/d/Y') }}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                {% for decision in firstDecisions %}
+                    <tr>
+                        <td><input type="checkbox" name="checkeboxe[]" class="late-form-check-input"
+                                   value="{{ decision.id }}"></td>
+                        <td>{{ decision.title }}</td>
+                        <td><a href="#" class="link-content-admin" data-bs-toggle="modal"
+                               data-bs-target="#exampleModal{{ loop.index }}">
+                                <i class="far fa-file-alt"></i> View description
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal-dialog modal-dialog-scrollable" id="exampleModal" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ decision.description | raw }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><a href="#" class="link-content-admin" data-bs-toggle="modal"
+                               data-bs-target="#comment-modal{{ loop.index }}">
+                                <i class="far fa-file-alt"></i> View comments and opinions
+                                ({{ decision.comments | length }})
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal-dialog modal-dialog-scrollable" id="comment-modal{{ loop.index }}"
+                                 tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Decision's comments and
+                                                opinions</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% for comment in decision.comments %}
+                                                <p><span
+                                                        class="decision-details-author-names">{{ comment.associated.user.firstname }} {{ comment.associated.user.lastname }}</span>,
+                                                    the {{ comment.createdAt | date("m/d/Y") }}
+                                                    {% if comment.associated.status == 'Expert' %} | Vote :  {% if comment.associated.isFavorable %}
+                                                        <i class="fa-solid fa-thumbs-up thumb-up-icon"></i>{% elseif comment.associated.isFavorable is not null %}
+                                                        <i class="fa-solid fa-thumbs-down thumb-down-icon"></i>{% endif %}{% endif %}
+                                                </p>
+                                                <p>{{ comment.content }}</p>
+                                                <hr>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {{ decision.createdAt | date('m/d/Y') }}
+                        </td>
+                        <td>
+                            {% if decision.firstDecisionAt is not null %}
+                                {{ decision.firstDecisionAt | date('m/d/Y') }}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if decision.finalDecisionAt is not null %}
+                                {{ decision.finalDecisionAt | date('m/d/Y') }}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="button" id="update-late-status-button" class="btn btn-primary hidden" data-bs-toggle="modal"
+                data-bs-target="#submitLateModal">
+            Update status
+        </button>
+
+        <div class="modal fade modal-dialog modal-dialog-centered" id="submitLateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm modifications</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure ? The selected decision will be modified, their status will be set to "delay in the process", and the author will be notified by email
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+{% endblock %}

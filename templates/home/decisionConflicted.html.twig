@@ -1,0 +1,5 @@
+{% for decision in decisionsInConflict %}
+    {#    {% if decision.status.name == 'Conflit sur la décision' %} #}
+    {% include 'home/blockForOneDecision.html.twig' %}
+    {#    {% endif %} #}
+{% endfor %}

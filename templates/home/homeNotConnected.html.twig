@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil | {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="message col-10 col-md-9 col-lg-8 col-xl-6 mx-auto">
+        <div class="text-center makesense mb-3"><img src="{{ asset('build/images/logo-makesense-dark.png') }}" alt="" class="logo-makesense-model-tel "></div>
+        <div class="  text-center warning "><h1>You need to be logged in to access to this page. </h1></div>
+        <div class="  text-center warning "><h1>Please sign in, or create a new account.</h1></div>
+        <div class="mx-auto p-5">
+            <a href="{{ path('app_login') }}"><button type="submit" class=" btn-lg connexion" >Sign in</button></a>
+            <a href="{{ path('app_register') }}"><button type="submit" class=" btn-lg connexion" >Register</button></a>
+        </div>
+    </div>
+
+{% endblock %}

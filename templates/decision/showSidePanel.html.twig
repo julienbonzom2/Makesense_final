@@ -1,0 +1,71 @@
+<h6 class="right-panel-title mb-3">Decision's timeline</h6>
+<div class="d-flex timeline-line">
+    <p class="timeline-date">{{ decision.createdAt | date("d/M/Y") }}</p>
+    <div class="first-point align-self-center"></div>
+    <p class="decision-status-timeline">Decision started</p>
+</div>
+{% if decision.firstDecision is null %}
+<div class="d-flex timeline-line">
+    <p class="timeline-date">{{ decision.createdAt | date_modify("+30 day") | date("d/M/Y") }}</p>
+    <div class="timeline-point align-self-center"></div>
+    <p class="decision-status-timeline">Deadline to update to "first decision"</p>
+</div>
+{% endif %}
+{% if decision.firstDecision is not null %}
+    <div class="d-flex timeline-line">
+        <p class="timeline-date">{{ decision.firstDecisionAt | date('d/M/Y') }}</p>
+        <div class="timeline-point align-self-center"></div>
+        <p class="decision-status-timeline">First decision taken</p>
+    </div>
+{% endif %}
+{% if decision.finalDecision is null %}
+    <div class="d-flex timeline-line">
+        <p class="timeline-date">{{ decision.firstDecisionAt | date_modify("+30 day") | date('d/M/Y') }}</p>
+        <div class="timeline-point align-self-center"></div>
+        <p class="decision-status-timeline">Deadline to update to "final decision"</p>
+    </div>
+{% endif %}
+ {% if decision.finalDecision is not null %}
+     <div class="d-flex timeline-line">
+         <p class="timeline-date">{{ decision.finalDecisionAt | date('d/M/Y') }}</p>
+         <div class="align-self-center last-timeline-point"></div>
+         <p class="decision-status-timeline">Final decision</p>
+     </div>
+ {% endif %}
+<div class="impacted-people">
+    <h6 class="right-panel-title mb-3">Impacted people</h6>
+    <div class="avatar-impacted">
+        {% for associate in decision.associateds.toArray %}
+            {% if associate.status == 'Impacted' %}
+                {% if associate.user.avatar == null %}
+                    <i class="fas fa-user me-1 avatar-people-list"></i>
+                {% else %}
+                    <img src="{{ asset('build/images/'~associate.user.avatar) }}" height="40" width="40" class="rounded-circle avatar-people-list"
+                         alt="avatar"/>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <a href="#link-to-comments" class="side-panel-anchor-link">See comments</a>
+    </div>
+
+</div>
+<div class="expert-people">
+    <h6 class="right-panel-title mb-3">Experts people</h6>
+    <div class="avatar-impacted">
+        {% for associate in decision.associateds.toArray %}
+            {% if associate.status == 'Expert' %}
+                {% if associate.user.avatar == null %}
+                        <i class="fas fa-user me-1 avatar-people-list"></i>
+                {% else %}
+                    <img src="{{ asset('build/images/'~associate.user.avatar) }}" height="40" width="40" class="rounded-circle avatar-people-list"
+                         alt="avatar"/>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <a href="#link-to-opinions" class="side-panel-anchor-link">See opinions</a>
+    </div>
+
+</div>
+
+{# {% set difference = date(decision.updatedAt | date_modify("+30 day")).diff(date('now')) %} #}
+{# {{ dump(difference) }} #}
